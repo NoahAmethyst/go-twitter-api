@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-by-username-username
 func (cli *Client) GetTwitterUserByUserName(username string) (TwitterUserResult, error) {
 	result := TwitterUserResult{}
 
@@ -19,6 +20,7 @@ func (cli *Client) GetTwitterUserByUserName(username string) (TwitterUserResult,
 	return result, err
 }
 
+// https://developer.twitter.com/en/docs/twitter-api/users/lookup/api-reference/get-users-id
 func (cli *Client) GetTwitterUserById(id string) (TwitterUserResult, error) {
 	result := TwitterUserResult{}
 
@@ -29,6 +31,7 @@ func (cli *Client) GetTwitterUserById(id string) (TwitterUserResult, error) {
 	return result, err
 }
 
+// https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-followers
 func (cli *Client) GetTwitterFollowers(id string) (TwitterFollowResult, error) {
 	result := TwitterFollowResult{}
 
@@ -39,6 +42,7 @@ func (cli *Client) GetTwitterFollowers(id string) (TwitterFollowResult, error) {
 	return result, err
 }
 
+// https://developer.twitter.com/en/docs/twitter-api/users/follows/api-reference/get-users-id-following
 func (cli *Client) GetTwitterFollowing(id string) (TwitterFollowResult, error) {
 	result := TwitterFollowResult{}
 

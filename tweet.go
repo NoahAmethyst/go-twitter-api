@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// https://developer.twitter.com/en/docs/twitter-api/tweets/retweets/api-reference/get-tweets-id-retweeted_by
 func (cli *Client) GetReTweeters(id int64, nextPageToken string) (ReTweeterResult, error) {
 	result := ReTweeterResult{}
 
