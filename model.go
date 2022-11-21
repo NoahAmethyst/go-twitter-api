@@ -25,6 +25,7 @@ type TwitterUserResult struct {
 
 type TwitterFollowResult struct {
 	Data []TwitterUser `json:"data"`
+	Meta MetaData      `json:"meta"`
 }
 
 type TwitterUser struct {

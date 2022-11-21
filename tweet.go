@@ -15,5 +15,4 @@ func (cli *Client) GetReTweeters(id int64, nextPageToken string) (ReTweeterResul
 	err := cli.callApi(retweetedByUrl, &result)
 
 	return result, err
-
 }

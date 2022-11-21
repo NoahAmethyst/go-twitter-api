@@ -3,7 +3,7 @@ package twitter
 import "testing"
 
 const (
-	TestTweetId = 1567778103438766080
+	TestTweetId = 1347569870578266115
 )
 
 func TestGetReTweeters(t *testing.T) {
