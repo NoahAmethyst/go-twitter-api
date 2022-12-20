@@ -15,7 +15,7 @@ func (cli *Client) GetTwitterUserByUserName(username string) (TwitterUserResult,
 
 	userLookupByUrl := fmt.Sprintf("https://api.twitter.com/2/users/by/username/%s?user.fields=created_at,url,public_metrics,profile_image_url", username)
 
-	err := cli.callApi(userLookupByUrl, &result)
+	err := cli.getApi(userLookupByUrl, &result)
 
 	return result, err
 }
@@ -26,7 +26,7 @@ func (cli *Client) GetTwitterUserById(id string) (TwitterUserResult, error) {
 
 	userLookupByUrl := fmt.Sprintf("https://api.twitter.com/2/users/%s?user.fields=created_at,url,public_metrics,profile_image_url", id)
 
-	err := cli.callApi(userLookupByUrl, &result)
+	err := cli.getApi(userLookupByUrl, &result)
 
 	return result, err
 }
@@ -41,7 +41,7 @@ func (cli *Client) GetTwitterFollowers(id, page string) (TwitterFollowResult, er
 		followersUrl = fmt.Sprintf("%s&pagination_token=%s", followersUrl, page)
 	}
 
-	err := cli.callApi(followersUrl, &result)
+	err := cli.getApi(followersUrl, &result)
 
 	return result, err
 }
@@ -54,15 +54,14 @@ func (cli *Client) GetTwitterFollowing(id, page string) (TwitterFollowResult, er
 
 	if len(page) > 0 {
 		followingUrl = fmt.Sprintf("%s&pagination_token=%s", followingUrl, page)
-
 	}
 
-	err := cli.callApi(followingUrl, &result)
+	err := cli.getApi(followingUrl, &result)
 
 	return result, err
 }
 
-func (cli *Client) GetTwitterAllFollowing(id string) ([]TwitterUser, error) {
+func (cli *Client) GetTwitterAllFollowings(id string) ([]TwitterUser, error) {
 	var data []TwitterUser
 	var err error
 	var nextToken string

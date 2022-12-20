@@ -13,7 +13,7 @@ func (cli *Client) GetReTweeters(id int64, nextPageToken string) (ReTweeterResul
 	if len(nextPageToken) > 0 {
 		retweetedByUrl += fmt.Sprintf("&pagination_token=%s", nextPageToken)
 	}
-	err := cli.callApi(retweetedByUrl, &result)
+	err := cli.getApi(retweetedByUrl, &result)
 
 	return result, err
 }
@@ -24,7 +24,7 @@ func (cli *Client) GetTweet(id int64) (TweetResult, error) {
 
 	tweetUrl := fmt.Sprintf("https://api.twitter.com/2/tweets/%d?tweet.fields=created_at", id)
 
-	err := cli.callApi(tweetUrl, &result)
+	err := cli.getApi(tweetUrl, &result)
 
 	return result, err
 }

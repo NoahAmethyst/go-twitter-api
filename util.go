@@ -39,7 +39,7 @@ func CheckUsername(username string) bool {
 	return match
 }
 
-func (cli *Client) callApi(apiUrl string, data interface{}) error {
+func (cli *Client) getApi(apiUrl string, data interface{}) error {
 
 	get, err := cli.Get(apiUrl)
 	if err != nil {
