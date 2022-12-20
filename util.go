@@ -16,6 +16,7 @@ const (
 	usernameRule = "^[A-Za-z0-9_]{1,15}$"
 )
 
+// give a tweet url then return the tweet id
 func ParseTweetIdByUrl(tweetUrl string) (int64, error) {
 	twitterUrl, err := url.Parse(tweetUrl)
 	if err != nil {
@@ -34,8 +35,9 @@ func ParseTweetIdByUrl(tweetUrl string) (int64, error) {
 	return tweetId, err
 }
 
+// check whether user name match the twitter username rule
 func CheckUsername(username string) bool {
-	match, _ := regexp.MatchString(usernameRule, "TristanClub_")
+	match, _ := regexp.MatchString(usernameRule, username)
 	return match
 }
 
