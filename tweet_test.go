@@ -23,12 +23,25 @@ func TestGetReTweeters(t *testing.T) {
 }
 
 func TestGetTweet(t *testing.T) {
-	/**
-	TWITTER_CONSUMER_KEY=hXPFra6AxNN5cEnuyWo7q5hUb
-	TWITTER_CONSUMER_SECRET=S63n5QPU9Y9sIni0zP97d9KhZLkgxR8rC9bIvAi5eVwwUXjlXr
-	*/
-	twitterConsumeKey := "hXPFra6AxNN5cEnuyWo7q5hUb"
-	twitterConsumerSecret := "S63n5QPU9Y9sIni0zP97d9KhZLkgxR8rC9bIvAi5eVwwUXjlXr"
+
+	twitterConsumeKey := ""
+	twitterConsumerSecret := ""
+
+	cli := NewClient(twitterConsumeKey, twitterConsumerSecret)
+
+	tweet, err := cli.GetTweet(TestTweetId)
+	if err != nil {
+		t.Error(err.Error())
+		return
+	}
+
+	t.Logf("result:%v", tweet)
+}
+
+func TestGetTweets(t *testing.T) {
+
+	twitterConsumeKey := ""
+	twitterConsumerSecret := ""
 
 	cli := NewClient(twitterConsumeKey, twitterConsumerSecret)
 

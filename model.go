@@ -9,10 +9,11 @@ type Retweeter struct {
 }
 
 type Tweet struct {
-	Id                  string    `json:"id"`
-	Text                string    `json:"text"`
-	CreatedAt           time.Time `json:"created_at"`
-	EditHistoryTweetIds []string  `json:"edit_history_tweet_ids"`
+	Id                  string        `json:"id"`
+	Text                string        `json:"text"`
+	CreatedAt           time.Time     `json:"created_at"`
+	EditHistoryTweetIds []string      `json:"edit_history_tweet_ids"`
+	PublicMetrics       PublicMetrics `json:"public_metrics"`
 }
 
 type TweetResult struct {
@@ -54,10 +55,16 @@ type TwitterUser struct {
 }
 
 type PublicMetrics struct {
+	//user
 	FollowersCount int `json:"followers_count"`
 	FollowingCount int `json:"following_count"`
 	TweetCount     int `json:"tweet_count"`
 	ListedCount    int `json:"listed_count"`
+	//tweet
+	RetweetCount int `json:"retweet_count"`
+	ReplyCount   int `json:"reply_count"`
+	LikeCount    int `json:"like_count"`
+	QuoteCount   int `json:"quote_count"`
 }
 
 type TwitterErrDetail struct {
