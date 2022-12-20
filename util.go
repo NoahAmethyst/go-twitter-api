@@ -43,7 +43,6 @@ func (cli *Client) callApi(apiUrl string, data interface{}) error {
 
 	get, err := cli.Get(apiUrl)
 	if err != nil {
-
 		return err
 	}
 

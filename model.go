@@ -8,6 +8,21 @@ type Retweeter struct {
 	UserName string `json:"username"`
 }
 
+type Tweet struct {
+	Id                  string    `json:"id"`
+	Text                string    `json:"text"`
+	CreatedAt           time.Time `json:"created_at"`
+	EditHistoryTweetIds []string  `json:"edit_history_tweet_ids"`
+}
+
+type TweetResult struct {
+	Data Tweet `json:"data"`
+}
+
+type TweetsResult struct {
+	Data []Tweet `json:"data"`
+}
+
 type MetaData struct {
 	ResultCount   int    `json:"result_count"`
 	NextToken     string `json:"next_token"`

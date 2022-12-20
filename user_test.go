@@ -30,7 +30,7 @@ func TestGetFollowers(t *testing.T) {
 
 	cli := NewClient(twitterConsumeKey, twitterConsumerSecret)
 
-	tweeters, err := cli.GetTwitterFollowers(TestUserId)
+	tweeters, err := cli.GetTwitterFollowers(TestUserId, "")
 	if err != nil {
 		t.Error(err.Error())
 		return
@@ -45,7 +45,7 @@ func TestGetFollowings(t *testing.T) {
 
 	cli := NewClient(twitterConsumeKey, twitterConsumerSecret)
 
-	tweeters, err := cli.GetTwitterFollowing(TestUserId)
+	tweeters, err := cli.GetTwitterFollowing(TestUserId, "")
 	if err != nil {
 		t.Error(err.Error())
 		return
