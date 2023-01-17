@@ -54,3 +54,19 @@ func TestGetTweets(t *testing.T) {
 		t.Logf("%v", _tweet)
 	}
 }
+
+func TestGetQuoteTweets(t *testing.T) {
+	twitterConsumeKey := ""
+	twitterConsumerSecret := ""
+
+	cli := NewClient(twitterConsumeKey, twitterConsumerSecret)
+
+	tweets, err := cli.GetQuoteTweets(1604578908124450816, false, true, "")
+	if err != nil {
+		t.Error(err.Error())
+		return
+	}
+	for _, _tweet := range tweets.Data {
+		t.Logf("%v", _tweet)
+	}
+}

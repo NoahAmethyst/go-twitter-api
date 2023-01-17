@@ -64,42 +64,50 @@ func (cli *Client) getApi(apiUrl string, data interface{}) error {
 	}
 
 	twitterErr := TwitterError{}
-	if get.StatusCode == http.StatusBadRequest {
-		err := json.Unmarshal(body, &twitterErr)
-		if err != nil {
+	if get.StatusCode != http.StatusOK {
+		if err := json.Unmarshal(body, &twitterErr); err != nil {
 			return err
 		}
 		if len(twitterErr.ErrorDetails) > 0 {
 			twitterErrDetail := twitterErr.ErrorDetails[0]
-			if len(twitterErrDetail.Detail) > 0 {
-				return errors.New(twitterErrDetail.Detail)
+			if len(twitterErrDetail.Title) > 0 {
+				err = errors.New(twitterErrDetail.Title)
 			}
 			if len(twitterErrDetail.Message) > 0 {
-				return errors.New(twitterErrDetail.Message)
+				err = errors.New(twitterErrDetail.Message)
 			}
-
-			if len(twitterErrDetail.Title) > 0 {
-				return errors.New(twitterErrDetail.Title)
+			if len(twitterErrDetail.Detail) > 0 {
+				err = errors.New(twitterErrDetail.Detail)
+			}
+		} else {
+			singleErr := TwitterErrDetail{}
+			if err := json.Unmarshal(body, &twitterErr); err != nil {
+				return err
+			}
+			if len(singleErr.Title) > 0 {
+				err = errors.New(singleErr.Title)
+			}
+			if len(singleErr.Detail) > 0 {
+				err = errors.New(singleErr.Detail)
 			}
 		}
+		return err
 	}
 
 	if strings.Contains(string(body), "errors") {
-		err := json.Unmarshal(body, &twitterErr)
-		if err != nil {
+		if err := json.Unmarshal(body, &twitterErr); err != nil {
 			return err
 		}
 		if len(twitterErr.ErrorDetails) > 0 {
 			twitterErrDetail := twitterErr.ErrorDetails[0]
-			if len(twitterErrDetail.Detail) > 0 {
-				return errors.New(twitterErrDetail.Detail)
+			if len(twitterErrDetail.Title) > 0 {
+				err = errors.New(twitterErrDetail.Title)
 			}
 			if len(twitterErrDetail.Message) > 0 {
-				return errors.New(twitterErrDetail.Message)
+				err = errors.New(twitterErrDetail.Message)
 			}
-
-			if len(twitterErrDetail.Title) > 0 {
-				return errors.New(twitterErrDetail.Title)
+			if len(twitterErrDetail.Detail) > 0 {
+				err = errors.New(twitterErrDetail.Detail)
 			}
 		}
 	}

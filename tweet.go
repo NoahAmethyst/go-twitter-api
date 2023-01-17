@@ -51,3 +51,35 @@ func (cli *Client) GetTweets(ids []int64) (TweetsResult, error) {
 	return result, err
 
 }
+
+func (cli *Client) GetQuoteTweets(id int64, needRetweets, needReplies bool, page string) (TweetsResult, error) {
+	result := TweetsResult{}
+	var exclude string
+
+	if !needRetweets && !needReplies {
+		exclude = "retweets,replies"
+	} else {
+		if needRetweets && !needReplies {
+			exclude = "replies"
+		} else if !needRetweets && needReplies {
+			exclude = "retweets"
+		}
+	}
+
+	tweetsUrl := fmt.Sprintf("https://api.twitter.com/2/tweets/%d/quote_tweets?max_results=100"+
+		"&expansions=attachments.media_keys,author_id,entities.mentions.username"+
+		"&tweet.fields=public_metrics,entities,referenced_tweets"+
+		"&user.fields=username"+
+		"&media.fields=url,media_key,type", id)
+
+	if len(exclude) > 0 {
+		tweetsUrl += fmt.Sprintf("&exclude=%s", exclude)
+	}
+
+	if len(page) > 0 {
+		tweetsUrl += fmt.Sprintf("&pagination_token=%s", page)
+	}
+	err := cli.getApi(tweetsUrl, &result)
+
+	return result, err
+}
