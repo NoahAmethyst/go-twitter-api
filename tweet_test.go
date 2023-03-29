@@ -7,9 +7,7 @@ const (
 )
 
 func TestGetReTweeters(t *testing.T) {
-	//set your consumeKey & consumerSecret
-	twitterConsumeKey := ""
-	twitterConsumerSecret := ""
+	twitterConsumeKey, twitterConsumerSecret := GetTwitterApiConfig()
 
 	cli := NewClient(twitterConsumeKey, twitterConsumerSecret)
 
@@ -23,9 +21,7 @@ func TestGetReTweeters(t *testing.T) {
 }
 
 func TestGetTweet(t *testing.T) {
-
-	twitterConsumeKey := ""
-	twitterConsumerSecret := ""
+	twitterConsumeKey, twitterConsumerSecret := GetTwitterApiConfig()
 
 	cli := NewClient(twitterConsumeKey, twitterConsumerSecret)
 
@@ -39,9 +35,7 @@ func TestGetTweet(t *testing.T) {
 }
 
 func TestGetTweets(t *testing.T) {
-
-	twitterConsumeKey := ""
-	twitterConsumerSecret := ""
+	twitterConsumeKey, twitterConsumerSecret := GetTwitterApiConfig()
 
 	cli := NewClient(twitterConsumeKey, twitterConsumerSecret)
 
@@ -56,8 +50,7 @@ func TestGetTweets(t *testing.T) {
 }
 
 func TestGetQuoteTweets(t *testing.T) {
-	twitterConsumeKey := ""
-	twitterConsumerSecret := ""
+	twitterConsumeKey, twitterConsumerSecret := GetTwitterApiConfig()
 
 	cli := NewClient(twitterConsumeKey, twitterConsumerSecret)
 

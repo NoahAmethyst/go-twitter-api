@@ -1,0 +1,5 @@
+twitter:
+  consumer:
+    key: ${TWITTER.CONSUMER.KEY}
+    secret: ${TWITTER.CONSUMER.SECRET}
+

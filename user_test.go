@@ -1,6 +1,10 @@
 package twitter
 
-import "testing"
+import (
+	"fmt"
+	"github.com/spf13/viper"
+	"testing"
+)
 
 const (
 	TestUsername = "realDonaldTrump"
@@ -8,9 +12,7 @@ const (
 )
 
 func TestGetUser(t *testing.T) {
-	//set your consumeKey & consumerSecret
-	twitterConsumeKey := ""
-	twitterConsumerSecret := ""
+	twitterConsumeKey, twitterConsumerSecret := GetTwitterApiConfig()
 
 	cli := NewClient(twitterConsumeKey, twitterConsumerSecret)
 
@@ -24,9 +26,7 @@ func TestGetUser(t *testing.T) {
 }
 
 func TestGetFollowers(t *testing.T) {
-	//set your consumeKey & consumerSecret
-	twitterConsumeKey := ""
-	twitterConsumerSecret := ""
+	twitterConsumeKey, twitterConsumerSecret := GetTwitterApiConfig()
 
 	cli := NewClient(twitterConsumeKey, twitterConsumerSecret)
 
@@ -39,9 +39,7 @@ func TestGetFollowers(t *testing.T) {
 }
 
 func TestGetFollowings(t *testing.T) {
-	//set your consumeKey & consumerSecret
-	twitterConsumeKey := ""
-	twitterConsumerSecret := ""
+	twitterConsumeKey, twitterConsumerSecret := GetTwitterApiConfig()
 
 	cli := NewClient(twitterConsumeKey, twitterConsumerSecret)
 
@@ -51,4 +49,18 @@ func TestGetFollowings(t *testing.T) {
 		return
 	}
 	t.Logf("result:%v", tweeters)
+}
+
+func GetTwitterApiConfig() (string, string) {
+
+	// set path of yaml
+	viper.SetConfigFile("config.yml")
+	viper.AddConfigPath(".")
+	viper.AutomaticEnv()
+	if err := viper.ReadInConfig(); err != nil {
+		panic(fmt.Errorf("read config from yml failed:%s", err))
+	}
+
+	// read value from yaml
+	return viper.GetString("twitter.consumer.key"), viper.GetString("twitter.consumer.secret")
 }
